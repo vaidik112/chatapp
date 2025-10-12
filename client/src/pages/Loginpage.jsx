@@ -8,15 +8,29 @@ const Loginpage = () => {
   const [password,setpassword] = useState("")
   const [bio,setbio] = useState("")
   const [isdatasubmitted,setisdatasubmitted] = useState(false)
-   return (
+  const onSubmitHandler = (event) =>{
+    event.preventDefault();
+    if(currstate==='sign up' && !isdatasubmitted)
+    {
+      setisdatasubmitted(true);
+      return;
+    }
+  }
+  
+  return (
     <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
       {/*-----------left--------------- */}
       <img src={assets.logo_big} alt="" className='w-[min(30vw,250px)]' />
       {/*--------right---------- */}
-      <form className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg' action="
+      <form 
+      onSubmit={onSubmitHandler}
+      className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg' action="
       ">
         <h2 className='font-medium text-2xl flex justify-between items-center'>
           {currstate}
+          {isdatasubmitted && <img onClick={()=>setisdatasubmitted(false)}   src={assets.arrow_icon} 
+          className='cursor-pointer w-5'
+          alt="" />  }
           <img src={assets.arrow_icon} alt="" className='w-5 cursor-pointer' />
         </h2>
         {
@@ -46,7 +60,7 @@ const Loginpage = () => {
           )
         }
         {
-            currstate === 'signup' && isdatasubmitted && 
+            currstate === 'sign up' && isdatasubmitted && 
         (
              <textarea 
               onChange={(e)=>
