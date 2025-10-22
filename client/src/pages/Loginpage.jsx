@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import assets from '../../chat-app-assets/assets'
+import { AuthContext } from '../../context/Authcontext';
 
 const Loginpage = () => {
   const [currstate,setcurrstate] = useState('sign up');
@@ -8,6 +9,8 @@ const Loginpage = () => {
   const [password,setpassword] = useState("")
   const [bio,setbio] = useState("")
   const [isdatasubmitted,setisdatasubmitted] = useState(false)
+  const {login} = useContext(AuthContext);
+
   const onSubmitHandler = (event) =>{
     event.preventDefault();
     if(currstate==='sign up' && !isdatasubmitted)
@@ -15,8 +18,13 @@ const Loginpage = () => {
       setisdatasubmitted(true);
       return;
     }
+    const payload =
+  currstate === "sign up"
+    ? { fullName: name, email, password, bio }
+    : { email, password };
+
+login(currstate === "sign up" ? "signup" : "login", payload);
   }
-  
   return (
     <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
       {/*-----------left--------------- */}
