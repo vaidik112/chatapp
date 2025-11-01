@@ -10,7 +10,7 @@ const Homepage = () => {
       rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${suser?
       'md:grid-cols-[1fr_1.5fr_1fr] xl: grid-cols-[1fr_2fr_1fr]'
       :'md:grid-cols-2'}`}>
-        <Sidebar suser={suser} setsuser={setsuser}/> 
+        <Sidebar /> 
         <Chatcontainer suser={suser} setsuser={setsuser}/>
         <RightSidebar suser={suser} setsuser={setsuser}/>
       </div>
